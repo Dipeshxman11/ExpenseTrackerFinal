@@ -56,7 +56,7 @@ exports.postUserLogin = (req, res, next) => {
                     res
                         .status(200)
                         .send(
-                            `<script>alert('Login Successful!'); window.location.href='/'</script>`
+                            `<script>alert('Login Successful!'); window.location.href='/homePage'</script>`
                         );
                 } else {
                     res
