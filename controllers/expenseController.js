@@ -12,6 +12,7 @@ exports.addExpense = (req, res, next) => {
   const description = req.body.description;
   const amount = req.body.amount;
 
+
   Expense.create({
     date: date,
     category: category,
@@ -47,6 +48,7 @@ exports.deleteExpense = (req, res, next) => {
 };
 
 exports.editExpense = (req, res, next) => {
+    
   const id = req.params.id;
   console.log(req.body);
   const category = req.body.category;
@@ -65,3 +67,4 @@ exports.editExpense = (req, res, next) => {
     })
     .catch((err) => console.log(err));
 };
+

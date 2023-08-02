@@ -4,6 +4,9 @@ const categoryBtn = document.querySelector("#categoryBtn");
 const form = document.getElementById("form1");
 const addExpenseBtn = document.getElementById("submitBtn");
 const table = document.getElementById("tbodyId");
+const buyPremiumBtn = document.getElementById("buyPremiumBtn");
+const reportsLink = document.getElementById("reportsLink");
+const leaderboardLink = document.getElementById("leaderboardLink");
 
 categoryItems.forEach((item) => {
   item.addEventListener("click", (e) => {
@@ -89,11 +92,12 @@ async function getAllExpenses() {
       const descriptionValue = expenses.description;
       const amountValue = expenses.amount;
 
+           
       let tr = document.createElement("tr");
       tr.className = "trStyle";
-
       table.appendChild(tr);
 
+      
       let idValue = document.createElement("th");
       idValue.setAttribute("scope", "row");
       idValue.setAttribute("style", "display: none");
@@ -101,17 +105,21 @@ async function getAllExpenses() {
       let th = document.createElement("th");
       th.setAttribute("scope", "row");
 
+        
       tr.appendChild(idValue);
       tr.appendChild(th);
+
 
       idValue.appendChild(document.createTextNode(id));
       th.appendChild(document.createTextNode(date));
 
+           
       let td1 = document.createElement("td");
       td1.appendChild(document.createTextNode(categoryValue));
 
       let td2 = document.createElement("td");
       td2.appendChild(document.createTextNode(descriptionValue));
+
 
       let td3 = document.createElement("td");
       td3.appendChild(document.createTextNode(amountValue));
@@ -122,10 +130,12 @@ async function getAllExpenses() {
       deleteBtn.className = "editDelete btn btn-danger delete";
       deleteBtn.appendChild(document.createTextNode("Delete"));
 
+  
       let editBtn = document.createElement("button");
       editBtn.className = "editDelete btn btn-success edit";
       editBtn.appendChild(document.createTextNode("Edit"));
 
+     
       td4.appendChild(deleteBtn);
       td4.appendChild(editBtn);
 
@@ -140,6 +150,7 @@ async function getAllExpenses() {
 }
 
 async function deleteExpense(e) {
+  
   try {
     const token = localStorage.getItem("token");
     if (e.target.classList.contains("delete")) {
@@ -203,10 +214,54 @@ async function editExpense(e) {
     (err) => console.log(err);
   }
 }
+async function buyPremium(e) {
+  const token = localStorage.getItem("token");
+  const res = await axios.get(
+    "http://localhost:3001/purchase/premiumMembership",
+    { headers: { Authorization: token } }
+  );
+  console.log(res);
+  var options = {
+    key: res.data.key_id, // Enter the Key ID generated from the Dashboard
+    order_id: res.data.order.id, // For one time payment
+    // This handler function will handle the success payment
+    handler: async function (response) {
+      const res = await axios.post(
+        "http://localhost:3001/purchase/updateTransactionStatus",
+        {
+          order_id: options.order_id,
+          payment_id: response.razorpay_payment_id,
+        },
+        { headers: { Authorization: token } }
+      );
+
+      console.log(res);
+      alert(
+        "Welcome to our Premium Membership, You have now Excess to Reports and LeaderBoard"
+      );
+      localStorage.setItem("token", res.data.token);
+    },
+  };
+  const rzp1 = new Razorpay(options);
+  rzp1.open();
+  e.preventDefault();
+}
+
+async function isPremiumUser() {
+  const token = localStorage.getItem("token");
+  const res = await axios.get("http://localhost:3001/user/isPremiumUser", {
+    headers: { Authorization: token },
+  });
+  if (res.data.isPremiumUser) {
+    buyPremiumBtn.innerHTML = "Premium Member &#128081";
+    reportsLink.removeAttribute("onclick");
+    leaderboardLink.removeAttribute("onclick");
+  }
+}
+
+buyPremiumBtn.addEventListener("click", buyPremium);
 addExpenseBtn.addEventListener("click", addExpense);
-
-document.addEventListener("DOMContentLoaded", getAllExpenses);
-
+document.addEventListener("DOMContentLoaded", isPremiumUser, getAllExpenses);
 table.addEventListener("click", (e) => {
   deleteExpense(e);
 });
