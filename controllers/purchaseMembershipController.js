@@ -1,6 +1,5 @@
 const Razorpay = require("razorpay");
 const Order = require("../models/ordersModel");
-const userController = require("./userController");
 
 exports.purchasePremium = async (req, res) => {
   try {
@@ -24,7 +23,7 @@ exports.purchasePremium = async (req, res) => {
     });
   } catch (err) {
     console.log(err);
-    res.status(403).json({ message: "Sometghing went wrong", error: err });
+    res.status(403).json({ message: "Something went wrong", error: err });
   }
 };
 
@@ -55,4 +54,3 @@ exports.updateTransactionStatus = async (req, res) => {
     res.status(403).json({ error: err, message: "Sometghing went wrong" });
   }
 };
-
