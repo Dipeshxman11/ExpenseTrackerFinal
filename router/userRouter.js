@@ -1,4 +1,4 @@
-const express = require("express");
+const express = require ("express");
 const router = express.Router();
 
 const userController = require("../controllers/userController");
@@ -9,6 +9,7 @@ router.use(express.static("public"));
 
 router.get("/", userController.getLoginPage);
 router.get("/isPremiumUser", userAuthentication, userController.isPremiumUser);
+router.get("/getAllUsers", userController.getAllUsers);
 router.post("/login", userController.postUserLogin);
 router.post("/signUp", userController.postUserSignUp);
 
