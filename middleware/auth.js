@@ -4,10 +4,12 @@ const User = require("../models/userModel");
 const authenticate = (req, res, next) => {
   try {
     const token = req.header("Authorization");
+    console.log(token);
     const user = jwt.verify(
       token,
       "kjhsgdfiuiew889kbasgdfskjabsdfjlabsbdljhsd"
     );
+    console.log('userID >>>> ', user.userId)
     User.findByPk(user.userId).then((user) => {
       req.user = user;
       next();
@@ -18,4 +20,4 @@ const authenticate = (req, res, next) => {
   }
 };
 
-module.exports = authenticate;
+module.exports = authenticate
