@@ -214,6 +214,7 @@ async function editExpense(e) {
     (err) => console.log(err);
   }
 }
+
 async function buyPremium(e) {
   const token = localStorage.getItem("token");
   const res = await axios.get(
@@ -255,7 +256,7 @@ async function isPremiumUser() {
   });
   if (res.data.isPremiumUser) {
     buyPremiumBtn.innerHTML = "Premium Member &#128081";
-    reportsLink.removeAttribute("onclick");
+    // reportsLink.removeAttribute("onclick");
     leaderboardLink.removeAttribute("onclick");
     leaderboardLink.setAttribute("href", "/premium/getLeaderboardPage");
     buyPremiumBtn.removeEventListener("click", buyPremium);

@@ -6,6 +6,7 @@ async function sendMail() {
     const res = await axios.post("http://localhost:3001/password/sendMail", {
       email: email,
     });
+    console.log(res);
     alert(res.data.message);
     window.location.href = "/";
   } catch (error) {

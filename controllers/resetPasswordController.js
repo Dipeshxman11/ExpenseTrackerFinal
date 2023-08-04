@@ -1,5 +1,6 @@
 const path = require("path");
 const User = require("../models/userModel");
+const sequelize=require('../util/database');
 const ResetPassword = require("../models/resetPasswordModel");
 const bcrypt = require("bcrypt");
 const Sib = require("sib-api-v3-sdk");
@@ -118,3 +119,4 @@ exports.updatePassword = async (req, res, next) => {
     return res.status(409).json({ message: "Failed to change password!" });
   }
 };
+

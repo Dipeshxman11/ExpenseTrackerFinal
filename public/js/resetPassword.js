@@ -1,6 +1,7 @@
 const resetPasswordBtn = document.getElementById("resetPasswordBtn");
 
-async function updatePassword() {
+async function updatePassword(e) {
+  e.preventDefault();
   try {
     const newPassword = document.getElementById("newPassword").value;
     const res = await axios.post(

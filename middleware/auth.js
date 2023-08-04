@@ -4,14 +4,17 @@ const User = require("../models/userModel");
 const authenticate = (req, res, next) => {
   try {
     const token = req.header("Authorization");
-    console.log(token);
+    // console.log(token);
     const user = jwt.verify(
       token,
-      "kjhsgdfiuiew889kbasgdfskjabsdfjlabsbdljhsd"
+      process.env.TOKEN_KEY
     );
-    console.log('userID >>>> ', user.userId)
+    //  console.log('user>>>> ', user)
+    ;
+    // console.log('userID >>>> ', user.userId)
     User.findByPk(user.userId).then((user) => {
       req.user = user;
+      // console.log("USER>>>>>", req.user)
       next();
     });
   } catch (err) {

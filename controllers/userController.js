@@ -9,7 +9,7 @@ const Sib = require("sib-api-v3-sdk");
 function generateAccessToken(id, email) {
   return jwt.sign(
     { userId: id, email: email },
-    "kjhsgdfiuiew889kbasgdfskjabsdfjlabsbdljhsd"
+    process.env.TOKEN_KEY
   );
 }
 
@@ -124,6 +124,7 @@ const getAllUsers = async (req, res, next) => {
 };
 
 
+
 module.exports = {
   generateAccessToken,
   getLoginPage,
@@ -131,5 +132,5 @@ module.exports = {
   postUserSignUp,
   isPremiumUser,
   getAllUsers,
-  
+
 };
