@@ -7,6 +7,8 @@ const table = document.getElementById("tbodyId");
 const buyPremiumBtn = document.getElementById("buyPremiumBtn");
 const reportsLink = document.getElementById("reportsLink");
 const leaderboardLink = document.getElementById("leaderboardLink");
+const logoutBtn = document.getElementById("logoutBtn");
+
 
 categoryItems.forEach((item) => {
   item.addEventListener("click", (e) => {
@@ -309,7 +311,6 @@ async function buyPremium(e) {
     "http://localhost:3001/purchase/premiumMembership",
     { headers: { Authorization: token } }
   );
-  console.log(res);
   var options = {
     key: res.data.key_id, // Enter the Key ID generated from the Dashboard
     order_id: res.data.order.id, // For one time payment
@@ -353,6 +354,15 @@ async function isPremiumUser() {
   }
 }
 
+async function logout() {
+  try {
+    localStorage.clear();
+    window.location.href = "/";
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 buyPremiumBtn.addEventListener("click", buyPremium);
 addExpenseBtn.addEventListener("click", addExpense);
 document.addEventListener("DOMContentLoaded", isPremiumUser);
@@ -364,3 +374,5 @@ table.addEventListener("click", (e) => {
 table.addEventListener("click", (e) => {
   editExpense(e);
 });
+
+logoutBtn.addEventListener("click", logout);
