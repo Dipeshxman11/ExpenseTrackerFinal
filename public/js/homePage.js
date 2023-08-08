@@ -56,16 +56,16 @@ async function addExpense() {
 
     const token = localStorage.getItem("token");
     const res = await axios
-    .post(
-      "http://localhost:3001/expense/addExpense",
-      {
-        date: dateStr,
-        category: categoryValue,
-        description: descriptionValue,
-        amount: parseInt(amountValue),
-      },
-      { headers: { Authorization: token } }
-    )
+      .post(
+        "http://localhost:3001/expense/addExpense",
+        {
+          date: dateStr,
+          category: categoryValue,
+          description: descriptionValue,
+          amount: parseInt(amountValue),
+        },
+        { headers: { Authorization: token } }
+      )
       .then((res) => {
         if (res.status == 200) {
           window.location.reload();
@@ -87,18 +87,18 @@ async function getAllExpenses() {
       { headers: { Authorization: token } }
     );
     res.data.expenses.forEach((expenses) => {
-    const id = expenses.id;
+      const id = expenses.id;
       const date = expenses.date;
       const categoryValue = expenses.category;
       const descriptionValue = expenses.description;
       const amountValue = expenses.amount;
 
-           
+
       let tr = document.createElement("tr");
       tr.className = "trStyle";
       table.appendChild(tr);
 
-      
+
       let idValue = document.createElement("th");
       idValue.setAttribute("scope", "row");
       idValue.setAttribute("style", "display: none");
@@ -106,7 +106,7 @@ async function getAllExpenses() {
       let th = document.createElement("th");
       th.setAttribute("scope", "row");
 
-        
+
       tr.appendChild(idValue);
       tr.appendChild(th);
 
@@ -114,7 +114,7 @@ async function getAllExpenses() {
       idValue.appendChild(document.createTextNode(id));
       th.appendChild(document.createTextNode(date));
 
-           
+
       let td1 = document.createElement("td");
       td1.appendChild(document.createTextNode(categoryValue));
 
@@ -131,12 +131,12 @@ async function getAllExpenses() {
       deleteBtn.className = "editDelete btn btn-danger delete";
       deleteBtn.appendChild(document.createTextNode("Delete"));
 
-  
+
       let editBtn = document.createElement("button");
       editBtn.className = "editDelete btn btn-success edit";
       editBtn.appendChild(document.createTextNode("Edit"));
 
-     
+
       td4.appendChild(deleteBtn);
       td4.appendChild(editBtn);
 
@@ -147,20 +147,20 @@ async function getAllExpenses() {
     });
 
 
-  // ---------------------------------------------------------------------//
+    // ---------------------------------------------------------------------//
 
-  const ul = document.getElementById("paginationUL");
-  for (let i = 1; i <= res.data.totalPages; i++) {
-    const li = document.createElement("li");
-    const a = document.createElement("a");
-    li.setAttribute("class", "page-item");
-    a.setAttribute("class", "page-link");
-    a.setAttribute("href", "#");
-    a.appendChild(document.createTextNode(i));
-    li.appendChild(a);
-    ul.appendChild(li);
-    a.addEventListener("click", paginationBtn);
-  }
+    const ul = document.getElementById("paginationUL");
+    for (let i = 1; i <= res.data.totalPages; i++) {
+      const li = document.createElement("li");
+      const a = document.createElement("a");
+      li.setAttribute("class", "page-item");
+      a.setAttribute("class", "page-link");
+      a.setAttribute("href", "#");
+      a.appendChild(document.createTextNode(i));
+      li.appendChild(a);
+      ul.appendChild(li);
+      a.addEventListener("click", paginationBtn);
+    }
 
   } catch {
     (err) => console.log(err);
@@ -239,7 +239,7 @@ async function paginationBtn(e) {
 
 
 async function deleteExpense(e) {
-  
+
   try {
     const token = localStorage.getItem("token");
     if (e.target.classList.contains("delete")) {
@@ -248,7 +248,7 @@ async function deleteExpense(e) {
       const res = await axios.get(
         `http://localhost:3001/expense/deleteExpense/${id}`,
         { headers: { Authorization: token } }
-        );
+      );
       window.location.reload();
     }
   } catch {
@@ -270,7 +270,7 @@ async function editExpense(e) {
       const res = await axios.get(
         "http://localhost:3001/expense/getAllExpenses",
         { headers: { Authorization: token } }
-        );
+      );
       res.data.forEach((expense) => {
         if (expense.id == id) {
           categoryValue.textContent = expense.category;
@@ -281,8 +281,7 @@ async function editExpense(e) {
           // const form = document.getElementById("form1");
           addExpenseBtn.removeEventListener("click", addExpense);
 
-          addExpenseBtn.addEventListener("click", async function update(e) 
-          {
+          addExpenseBtn.addEventListener("click", async function update(e) {
             e.preventDefault();
             console.log("request to backend for edit");
             const res = await axios.post(
@@ -291,8 +290,8 @@ async function editExpense(e) {
                 category: categoryValue.textContent.trim(),
                 description: descriptionValue.value,
                 amount: amountValue.value,
-            },
-            { headers: { Authorization: token } }
+              },
+              { headers: { Authorization: token } }
             );
             window.location.reload();
           });
@@ -327,8 +326,8 @@ async function buyPremium(e) {
       console.log(res);
       alert(
         "Welcome to our Premium Membership, You have now access to Reports and LeaderBoard"
-        );
-        window.location.reload();
+      );
+      window.location.reload();
       localStorage.setItem("token", res.data.token);
     },
   };

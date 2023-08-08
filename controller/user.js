@@ -36,32 +36,32 @@ const postUserSignUp = async (req, res, next) => {
     const email = req.body.email;
     const password = req.body.password;
     await User.findOne({ where: { email: email } })
-    .then((user) => {
-      if (user) {
-        res
-          .status(409)
-          .send(
-            `<script>alert('This email is already taken. Please choose another one.'); window.location.href='/'</script>`
-          );
-      } else {
-        bcrypt.hash(password, 10, async (err, hash) => {
-          await User.create({
-            name: name,
-            email: email,
-            password: hash,
+      .then((user) => {
+        if (user) {
+          res
+            .status(409)
+            .send(
+              `<script>alert('This email is already taken. Please choose another one.'); window.location.href='/'</script>`
+            );
+        } else {
+          bcrypt.hash(password, 10, async (err, hash) => {
+            await User.create({
+              name: name,
+              email: email,
+              password: hash,
+            });
           });
-        });
-        res
-        .status(200)
-        .send(
-          `<script>alert('User Created Successfully!'); window.location.href='/'</script>`
-        );
-    }
-  })
-  .catch((err) => console.log(err));
-} catch (error) {
-console.log(error);
-}
+          res
+            .status(200)
+            .send(
+              `<script>alert('User Created Successfully!'); window.location.href='/'</script>`
+            );
+        }
+      })
+      .catch((err) => console.log(err));
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const postUserLogin = async (req, res, next) => {
