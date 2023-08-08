@@ -151,6 +151,7 @@ async function getMonthlyReport(e) {
   }
 }
 
+
 async function logout() {
   try {
     localStorage.clear();

@@ -1,24 +1,37 @@
 const express = require("express");
 const app = express();
-
 const bodyParser = require("body-parser");
+const path = require("path");
+const fs = require("fs");
 
+const cors = require("cors");
+app.use(cors());
 const dotenv = require("dotenv");
 dotenv.config();
 
+
+const accessLogStream = fs.createWriteStream(
+  path.join(__dirname, "access.log"),
+  { flags: "a" }
+);
+
+const morgan = require("morgan");
+app.use(morgan("combined", { stream: accessLogStream }));
+
+
 const sequelize = require("./util/database");
 
-const userRouter = require("./router/userRouter");
-const expenseRouter = require("./router/expenseRouter");
-const purchaseMembershipRouter = require("./router/purchaseMembershipRouter");
-const leaderboardRouter = require("./router/leaderboardRouter");
-const resetPasswordRouter = require("./router/resetPasswordRouter");
-const reportsRouter = require("./router/reportsRouter");
+const userRouter = require("./routes/user");
+const expenseRouter = require("./routes/expense");
+const purchaseMembershipRouter = require("./routes/purchaseMembership");
+const leaderboardRouter = require("./routes/leaderboard");
+const resetPasswordRouter = require("./routes/resetPassword");
+const reportsRouter = require("./routes/report");
 
-const User = require("./models/userModel");
-const Expense = require("./models/expenseModel");
-const Order = require("./models/ordersModel");
-const ResetPassword = require("./models/resetPasswordModel");
+const User = require("./models/users");
+const Expense = require("./models/expenses");
+const Order = require("./models/orders");
+const ResetPassword = require("./models/resetPasswords");
 
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -52,6 +65,10 @@ User.hasMany(ResetPassword);
 sequelize
   .sync()
   .then((result) => {
-    app.listen(3001);
+    app.listen(process.env.PORT || 3000, () => {
+      console.log('Server is running on port ' + (process.env.PORT || 3000));
+    });
   })
-  .catch((err) => console.log(err));
+  .catch((err) => {
+    console.error('Error synchronizing database:', err);
+  });

@@ -1,20 +1,12 @@
 const jwt = require("jsonwebtoken");
-const User = require("../models/userModel");
+const User = require("../models/users");
 
 const authenticate = (req, res, next) => {
   try {
     const token = req.header("Authorization");
-    // console.log(token);
-    const user = jwt.verify(
-      token,
-      process.env.TOKEN_KEY
-    );
-    //  console.log('user>>>> ', user)
-    ;
-    // console.log('userID >>>> ', user.userId)
+    const user = jwt.verify( token,process.env.TOKEN_KEY);
     User.findByPk(user.userId).then((user) => {
       req.user = user;
-      // console.log("USER>>>>>", req.user)
       next();
     });
   } catch (err) {
@@ -23,4 +15,4 @@ const authenticate = (req, res, next) => {
   }
 };
 
-module.exports = authenticate
+module.exports = authenticate;

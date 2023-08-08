@@ -80,7 +80,6 @@ async function addExpense() {
 }
 
 async function getAllExpenses() {
-  // e.preventDefault();
   try {
     const token = localStorage.getItem("token");
     const res = await axios.get(
@@ -348,6 +347,7 @@ async function isPremiumUser() {
     // reportsLink.removeAttribute("onclick");
     leaderboardLink.removeAttribute("onclick");
     leaderboardLink.setAttribute("href", "/premium/getLeaderboardPage");
+    reportsLink.removeAttribute("onclick");
     reportsLink.setAttribute("href", "/reports/getReportsPage");
     buyPremiumBtn.removeEventListener("click", buyPremium);
   } else {
