@@ -1,7 +1,7 @@
 const categoryItems = document.querySelectorAll(".dropdown-item");
 const categoryInput = document.querySelector("#categoryInput");
 const categoryBtn = document.querySelector("#categoryBtn");
-const tbody = document.getElementById("tbodyId");
+const tbody =  document.getElementById("tbodyId");
 const logoutBtn = document.getElementById("logoutBtn");
 
 

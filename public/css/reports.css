@@ -101,5 +101,6 @@ body {
 #dailyTotalAmount,
 #monthlyTotal,
 #monthlyTotalAmount {
+  
   font-weight: bolder !important;
 }  

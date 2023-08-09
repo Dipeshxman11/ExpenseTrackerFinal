@@ -62,7 +62,7 @@ async function getDailyReport(e) {
     tr.setAttribute("class", "trStyle");
     tfootDaily.appendChild(tr);
 
-    const td1 = document.createElement("td");
+    const td1 =  document.createElement("td");
     const td2 = document.createElement("td");
     const td3 = document.createElement("td");
     const td4 = document.createElement("td");
