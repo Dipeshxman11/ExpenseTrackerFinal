@@ -22,7 +22,7 @@ async function getDailyReport(e) {
 
     let totalAmount = 0;
     const res = await axios.post(
-      "http://localhost:3001/reports/dailyReports",
+      "http://13.51.171.0:3001/reports/dailyReports",
       {
         date: formattedDate,
       },
@@ -92,7 +92,7 @@ async function getMonthlyReport(e) {
 
     let totalAmount = 0;
     const res = await axios.post(
-      "http://localhost:3001/reports/monthlyReports",
+      "http://13.51.171.0:3001/reports/monthlyReports",
       {
         month: formattedMonth,
       },
