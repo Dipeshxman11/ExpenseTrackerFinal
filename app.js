@@ -55,6 +55,7 @@ app.use("/reports", reportsRouter);
 
 app.use((req, res) => {
   console.log("urllll", req.url);
+  
   res.sendFile(path.join(__dirname, `public/${req.url}`));
 })
 
