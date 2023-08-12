@@ -21,7 +21,11 @@ function login() {
   };
 
   axios
+<<<<<<< HEAD
     .post("http://13.48.46.130:3001/user/login", loginDetails)
+=======
+    .post("http://16.171.110.20:3001/user/login", loginDetails)
+>>>>>>> 1e26855 (ipChanged)
     .then((result) => {
       alert(result.data.message);
       localStorage.setItem("token", result.data.token);

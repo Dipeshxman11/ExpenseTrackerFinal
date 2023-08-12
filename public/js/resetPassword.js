@@ -4,7 +4,11 @@ async function updatePassword() {
   try {
     const newPassword =  document.getElementById("newPassword").value;
     const res = await axios.post(
+<<<<<<< HEAD
       "http://13.48.46.130:3001/password/resetPassword",
+=======
+      "http://16.171.110.20:3001/password/resetPassword",
+>>>>>>> 1e26855 (ipChanged)
       {
         password: newPassword,
       }
