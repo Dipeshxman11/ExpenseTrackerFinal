@@ -341,7 +341,7 @@ async function isPremiumUser() {
   const res = await axios.get("http://16.171.110.20:3001/user/isPremiumUser", {
     headers: { Authorization: token },
   });
-  
+
   if (res.data.isPremiumUser) {
     buyPremiumBtn.innerHTML =  "Premium Member &#128081";
     // reportsLink.removeAttribute("onclick");

@@ -57,7 +57,7 @@ exports.sendMail = (req, res, next) => {
       ];
 
       const htmlContent = `<h3>Hi! We got the request from you for reset the password. Here is the link below >>></h3>
-      <a href="http://localhost:3001/password/resetPasswordPage/${requestId}"> Click Here</a>`;
+      <a href="http://13.48.46.130:3001/password/resetPasswordPage/${requestId}"> Click Here</a>`;
 
 
       return transEmailApi.sendTransacEmail({
