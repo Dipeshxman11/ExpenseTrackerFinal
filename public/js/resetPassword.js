@@ -16,6 +16,7 @@ async function updatePassword() {
       {
         password: newPassword,
       }
+      
     );
     alert(res.data.message);
     window.location.href = "/";

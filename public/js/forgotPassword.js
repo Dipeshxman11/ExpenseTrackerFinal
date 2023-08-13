@@ -2,6 +2,7 @@ const resetPasswordLinkBtn = document.getElementById("resetPasswordLinkBtn");
 
 async function sendMail() {
   try {
+    
     const email  = document.getElementById("email").value;
 <<<<<<< HEAD
 <<<<<<< HEAD

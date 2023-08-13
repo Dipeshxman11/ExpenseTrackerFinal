@@ -5,6 +5,7 @@ const tbody =  document.getElementById("tbodyId");
 const logoutBtn = document.getElementById("logoutBtn");
 
 
+
 categoryItems.forEach((item) => {
   item.addEventListener("click", (e) => {
     const selectedCategory = e.target.getAttribute("data-value");
