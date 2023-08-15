@@ -54,8 +54,6 @@ app.use("/password", resetPasswordRouter);
 app.use("/reports", reportsRouter);
 
 app.use((req, res) => {
-  console.log("urllll", req.url);
-  
   res.sendFile(path.join(__dirname, `public/${req.url}`));
 })
 
@@ -71,8 +69,8 @@ User.hasMany(ResetPassword);
 sequelize
   .sync()
   .then((result) => {
-    app.listen(process.env.PORT || 3000, () => {
-      console.log('Server is running on port ' + (process.env.PORT || 3000));
+    app.listen(process.env.PORT || 3001, () => {
+      console.log('Server is running on port ' + (process.env.PORT || 3001));
     });
   })
   .catch((err) => {

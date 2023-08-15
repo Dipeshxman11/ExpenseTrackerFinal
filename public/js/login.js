@@ -14,36 +14,56 @@ signIn.addEventListener("click", () => {
   container.classList.remove("right-panel-active");
 });
 
-function login() {
+// function login() {
+//   const loginDetails = {
+//     loginEmail: loginEmail.value,
+//     loginPassword: loginPassword.value,
+//   };
+
+
+//   axios
+//     .post("http://13.48.46.130:3001/user/login", loginDetails)
+//     .then((result) => {
+//       alert(result.data.message);
+//       localStorage.setItem("token", result.data.token);
+//       window.location.href = "/homePage";
+//     })
+//     .catch((error) => {
+//       if (error.response) {
+//         const errorMessage = error.response.data.message;
+//         alert(errorMessage);
+//       } else {
+//         alert("An error occurred. Please try again later.");
+//       }
+//     });
+// }
+
+
+
+async function login() {
   const loginDetails = {
     loginEmail: loginEmail.value,
     loginPassword: loginPassword.value,
   };
 
+  try {
+    const response = await axios.post(
+      "http://13.48.46.130:3001/user/login",
+      loginDetails
+    );
 
-  axios
-<<<<<<< HEAD
-<<<<<<< HEAD
-    .post("http://13.48.46.130:3001/user/login", loginDetails)
-=======
-    .post("http://16.171.110.20:3001/user/login", loginDetails)
->>>>>>> 1e26855 (ipChanged)
-=======
-    .post("http://13.48.46.130:3001/user/login", loginDetails)
->>>>>>> 9b20c26 (finalipAddress)
-    .then((result) => {
-      alert(result.data.message);
-      localStorage.setItem("token", result.data.token);
-      window.location.href = "/homePage";
-    })
-    .catch((error) => {
-      if (error.response) {
-        const errorMessage = error.response.data.message;
-        alert(errorMessage);
-      } else {
-        alert("An error occurred. Please try again later.");
-      }
-    });
+    const result = response.data;
+    alert(result.message);
+    localStorage.setItem("token", result.token);
+    window.location.href = "/homePage";
+  } catch (error) {
+    if (error.response) {
+      const errorMessage = error.response.data.message;
+      alert(errorMessage);
+    } else {
+      alert("An error occurred. Please try again later.");
+    }
+  }
 }
 
 loginBtn.addEventListener("click", login);

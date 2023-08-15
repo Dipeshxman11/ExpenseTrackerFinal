@@ -21,16 +21,9 @@ async function getDailyReport(e) {
       .padStart(2, "0")}-${date.getFullYear()}`;
 
     let totalAmount = 0;
-    const res = await axios.post(
-<<<<<<< HEAD
-<<<<<<< HEAD
+    const res = await axios
+    .post(
       "http://13.48.46.130:3001/reports/dailyReports",
-=======
-      "http://16.171.110.20:3001/reports/dailyReports",
->>>>>>> 1e26855 (ipChanged)
-=======
-      "http://13.48.46.130:3001/reports/dailyReports",
->>>>>>> 9b20c26 (finalipAddress)
       {
         date: formattedDate,
       },
@@ -101,16 +94,9 @@ async function getMonthlyReport(e) {
 
     let totalAmount = 0;
     const res = await axios.post(
-<<<<<<< HEAD
-<<<<<<< HEAD
+
       "http://13.48.46.130:3001/reports/monthlyReports",
-=======
-      "http://16.171.110.20:3001/reports/monthlyReports",
->>>>>>> 1e26855 (ipChanged)
-=======
-      "http://13.48.46.130:3001/reports/monthlyReports",
->>>>>>> 9b20c26 (finalipAddress)
-      {
+   {
         month: formattedMonth,
       },
       { headers: { Authorization: token } }

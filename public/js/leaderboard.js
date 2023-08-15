@@ -14,15 +14,9 @@ categoryItems.forEach((item) => {
 });
 
 async function getLeaderboard() {
-<<<<<<< HEAD
-<<<<<<< HEAD
+
   const res = await axios.get("http://13.48.46.130:3001/user/getAllUsers");
-=======
-  const res = await axios.get("http://16.171.110.20:3001/user/getAllUsers");
->>>>>>> 1e26855 (ipChanged)
-=======
-  const res = await axios.get("http://13.48.46.130:3001/user/getAllUsers");
->>>>>>> 9b20c26 (finalipAddress)
+
   let position = 1;
 
   res.data.forEach((user) => {
